@@ -25,6 +25,7 @@ function install_zsh () {
     sudo apt-get install zsh
     printf "${WARN}Installing oh-my-zsh.\n${NC}"
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    cat ./.zshrc > ~/.zshrc
 }
 
 if [ $# -eq 0 ]
