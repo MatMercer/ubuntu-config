@@ -9,6 +9,7 @@ BASEDIR='.'
 
 # usage description
 function usage () {
+    # TODO: Update usage
     printf "This file installs different utilities in your system.\nThe usage is as follow:\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
     printf "\t-z --zsh\tinstall zsh\n"
