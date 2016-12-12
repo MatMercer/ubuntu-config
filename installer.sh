@@ -50,6 +50,7 @@ function install_nodejs () {
     fix_zsh_secure_folder
 }
 
+# Find out where the sh file is stored
 function update_basedir () {
     BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 }
