@@ -11,6 +11,7 @@ BASEDIR='.'
 function usage () {
     # TODO: Update usage
     printf "This file installs different utilities in your system.\nThe usage is as follow:\n"
+    printf "\t-n --node\tinstall nodejs\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
     printf "\t-z --zsh\tinstall zsh\n"
     printf "\t-h --help\tdisplay usage\n\0"
