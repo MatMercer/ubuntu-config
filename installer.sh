@@ -7,6 +7,27 @@ NC='\033[0m' # No Color
 # Global variables
 BASEDIR='.'
 
+# Find out where the sh file is stored
+function update_basedir () {
+    BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+}
+
+update_basedir
+
+# update home zshrc
+function update_zshrc () {
+    printf "${WARN}Updating zshrc...\n${NC}";
+    cat $BASEDIR/.zshrc > ~/.zshrc
+}
+
+# Fix zsh prompting insecure folders
+function fix_zsh_secure_folder () {
+    printf "${WARN}Changing zsh site-functions perms...\n${NC}";
+    cd /usr/local/share/zsh
+    sudo chmod -R 755 ./site-functions
+    cd $BASEDIR
+}
+
 # usage description
 function usage () {
     printf "This file installs different utilities in your system.\nThe usage is as follow:\n"
@@ -58,27 +79,6 @@ function install_nodejs () {
     printf "${WARN}Going to fix npm perms...\n${NC}"
     wget -O- https://raw.githubusercontent.com/glenpike/npm-g_nosudo/master/npm-g-nosudo.sh | sh
     fix_zsh_secure_folder
-}
-
-# Find out where the sh file is stored
-function update_basedir () {
-    BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-}
-
-update_basedir
-
-# update home zshrc
-function update_zshrc () {
-    printf "${WARN}Updating zshrc...\n${NC}";
-    cat $BASEDIR/.zshrc > ~/.zshrc
-}
-
-# Fix zsh prompting insecure folders
-function fix_zsh_secure_folder () {
-    printf "${WARN}Changing zsh site-functions perms...\n${NC}";
-    cd /usr/local/share/zsh
-    sudo chmod -R 755 ./site-functions
-    cd $BASEDIR
 }
 
 if [ $# -eq 0 ]
