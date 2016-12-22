@@ -9,9 +9,9 @@ BASEDIR='.'
 
 # usage description
 function usage () {
-    # TODO: Update usage
     printf "This file installs different utilities in your system.\nThe usage is as follow:\n"
     printf "\t-n --node\tinstall nodejs\n"
+    printf "\t-s --sublime-text\tinstall sublime text 3\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
     printf "\t-z --zsh\tinstall zsh\n"
     printf "\t-h --help\tdisplay usage\n\0"
@@ -32,6 +32,15 @@ function install_zsh () {
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     update_zshrc
     fix_zsh_secure_folder
+}
+
+# sublime text installer
+function install_sublime () {
+    printf "${WARN}Going to install sublime text 3.\n${NC}"
+    printf "${WARN}Installing sublime text 3.\n${NC}"
+    sudo add-apt-repository ppa:webupd8team/sublime-text-3
+    sudo apt-get update
+    sudo apt-get install sublime-text
 }
 
 # npm and nodejs installer
@@ -87,6 +96,8 @@ while [ "$1" != "" ]; do
         -n | --node)            install_nodejs
                                 ;;
         -u | --updatezshrc)     update_zshrc
+                                ;;
+        -s | --sublime-text)    install_sublime
                                 ;;
         -h | --help )           usage
                                 exit
