@@ -31,6 +31,7 @@ function fix_zsh_secure_folder () {
 # usage description
 function usage () {
     printf "This file installs different utilities in your system.\nThe usage is as follow:\n"
+    printf "\t-j8 --java-8\tinstall Java 8\n"
     printf "\t-n --node\tinstall nodejs\n"
     printf "\t-s --sublime-text\tinstall sublime text 3\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
@@ -81,6 +82,17 @@ function install_nodejs () {
     fix_zsh_secure_folder
 }
 
+# java 8 installer
+function install_java_8 () {
+    printf "${WARN}Going to install Java 8.\n${NC}"
+
+    printf "${WARN}Installing Java 8.\n${NC}"
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-get update
+    sudo apt-get install oracle-java8-installer
+    sudo apt-get install oracle-java8-set-default
+}
+
 if [ $# -eq 0 ]
 then
     usage
@@ -92,6 +104,8 @@ while [ "$1" != "" ]; do
                                 install_vim
                                 ;;
         -z | --zsh)             install_zsh
+                                ;;
+        -j8 | --java-8)         install_java_8
                                 ;;
         -n | --node)            install_nodejs
                                 ;;
