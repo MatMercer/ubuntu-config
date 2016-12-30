@@ -119,11 +119,11 @@ while [ "$1" != "" ]; do
                                 ;;
         -j8 | --java-8)         install_java_8
                                 ;;
-        -m | --mysql_5_6)       install_mysql_5_6
+        -m | --mysql-5-6)       install_mysql_5_6
                                 ;;
         -n | --node)            install_nodejs
                                 ;;
-        -u | --updatezshrc)     update_zshrc
+        -u | --update-zshrc)     update_zshrc
                                 ;;
         -s | --sublime-text)    install_sublime
                                 ;;
