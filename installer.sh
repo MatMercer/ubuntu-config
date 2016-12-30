@@ -32,6 +32,7 @@ function fix_zsh_secure_folder () {
 function usage () {
     printf "This file installs different utilities in your system.\nThe usage is as follow:\n"
     printf "\t-j8 --java-8\tinstall Java 8\n"
+    printf "\t-m --mysql_5_6\tinstall mySQL 5.6\n"
     printf "\t-n --node\tinstall nodejs\n"
     printf "\t-s --sublime-text\tinstall sublime text 3\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
@@ -93,6 +94,17 @@ function install_java_8 () {
     sudo apt-get install oracle-java8-set-default
 }
 
+# mysql 5.6 installer
+function install_mysql_5_6 () {
+    printf "${WARN}Going to MySQL 5.6.\n${NC}"
+
+    printf "${WARN}Installing MySQL 5.6.\n${NC}"
+    sudo apt-get update
+    sudo apt-get install mysql-server
+    sudo mysql_secure_installation
+    sudo mysql_install_db
+}
+
 if [ $# -eq 0 ]
 then
     usage
@@ -106,6 +118,8 @@ while [ "$1" != "" ]; do
         -z | --zsh)             install_zsh
                                 ;;
         -j8 | --java-8)         install_java_8
+                                ;;
+        -m | --mysql_5_6)       install_mysql_5_6
                                 ;;
         -n | --node)            install_nodejs
                                 ;;
