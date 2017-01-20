@@ -42,7 +42,8 @@ function usage () {
     printf "\t-s --sublime-text\tinstall sublime text 3\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
     printf "\t-z --zsh\tinstall zsh\n"
-    printf "\t-h --help\tdisplay usage\n\0"
+    printf "\t-h --help\tdisplay usage\n"
+    printf "\t-uh --update-home\tupdate home folder files.\n\0"
 }
 
 # vim installer
@@ -111,6 +112,18 @@ function install_mysql_5_6 () {
     sudo mysql_install_db
 }
 
+function update_git_config () {
+    warn "Updating .gitconfig..."
+    cat $BASEDIR/.gitconfig > ~/.gitconfig
+}
+
+# Update home files
+function update_home () {
+    warn "Updating home folder files..."
+    update_zshrc
+    update_git_config
+}
+
 if [ $# -eq 0 ]
 then
     usage
@@ -129,7 +142,7 @@ while [ "$1" != "" ]; do
                                 ;;
         -n | --node)            install_nodejs
                                 ;;
-        -u | --update-zshrc)     update_zshrc
+       -uh | --update-home)    update_home
                                 ;;
         -s | --sublime-text)    install_sublime
                                 ;;
