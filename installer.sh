@@ -39,7 +39,9 @@ function usage () {
     printf "\t-j8 --java-8\tinstall Java 8\n"
     printf "\t-m --mysql_5_6\tinstall mySQL 5.6\n"
     printf "\t-n --node\tinstall nodejs\n"
+    printf "\t-p --php\tinstall php5\n"
     printf "\t-s --sublime-text\tinstall sublime text 3\n"
+    printf "\t-c --composer\Iinstall php composer\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
     printf "\t-z --zsh\tinstall zsh\n"
     printf "\t-h --help\tdisplay usage\n"
@@ -112,6 +114,29 @@ function install_mysql_5_6 () {
     sudo mysql_install_db
 }
 
+# PHP installer
+function install_php() {
+    warn "Going to install PHP 5."
+
+    warn "Installing PHP 5."
+    sudo apt-get update
+    sudo apt-get install php5 php5-cli
+}
+
+# Install composer
+function install_composer () {
+    warn "Going to install Composer."
+
+    install_php
+
+    warn "Installing Composer."
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+    sudo php composer-setup.php --install-dir=/usr/bin/ --filename=composer
+    php -r "unlink('composer-setup.php');"
+}
+
+# Updates the git configuration in the home folder
 function update_git_config () {
     warn "Updating .gitconfig..."
     cat $BASEDIR/.gitconfig > ~/.gitconfig
@@ -142,9 +167,13 @@ while [ "$1" != "" ]; do
                                 ;;
         -n | --node)            install_nodejs
                                 ;;
-       -uh | --update-home)    update_home
+       -uh | --update-home)     update_home
                                 ;;
         -s | --sublime-text)    install_sublime
+                                ;;
+        -c | --composer)        install_composer
+                                ;;
+        -p | --php5)            install_php
                                 ;;
         -h | --help )           usage
                                 exit
