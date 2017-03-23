@@ -43,6 +43,7 @@ function usage () {
     printf "\t-s --sublime-text\tinstall sublime text 3\n"
     printf "\t-c --composer\tinstall php composer\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
+    printf "\t-apd --apache-devel\tSetup apache2 and '$USER' home folder to use it as a server root\n"
     printf "\t-z --zsh\tinstall zsh\n"
     printf "\t-h --help\tdisplay usage\n"
     printf "\t-uh --update-home\tupdate home folder files.\n\0"
@@ -149,6 +150,24 @@ function update_home () {
     update_git_config
 }
 
+# Configure the permissions and apache config to use the home of the user as webserver root
+function apache_devel_config() {
+    warn "Enabling apache2 userdir..."
+    sudo a2enmod userdir
+
+    warn "Adding the user group to www-data..."
+    sudo usermod -aG $USER www-data
+
+    warn "Changing $HOME perms to 710..."
+    chmod 710 $HOME
+
+    warn "Creating $HOME/public_html..."
+    mkdir "$HOME/public_html/"
+
+    warn "Restarting apache2..."
+    sudo service apache2 restart
+}
+
 if [ $# -eq 0 ]
 then
     usage
@@ -174,6 +193,8 @@ while [ "$1" != "" ]; do
         -c | --composer)        install_composer
                                 ;;
         -p | --php5)            install_php
+                                ;;
+        -apd | --apache-devel)  apache_devel_config
                                 ;;
         -h | --help )           usage
                                 exit
