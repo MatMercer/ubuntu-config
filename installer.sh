@@ -41,7 +41,7 @@ function usage () {
     printf "\t-n --node\tinstall nodejs\n"
     printf "\t-p --php\tinstall php5\n"
     printf "\t-s --sublime-text\tinstall sublime text 3\n"
-    printf "\t-c --composer\Iinstall php composer\n"
+    printf "\t-c --composer\tinstall php composer\n"
     printf "\t-v --vim\tinstall spf13 vim\n"
     printf "\t-z --zsh\tinstall zsh\n"
     printf "\t-h --help\tdisplay usage\n"
