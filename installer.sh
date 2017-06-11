@@ -65,6 +65,11 @@ function install_zsh () {
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     update_zshrc
     fix_zsh_secure_folder
+
+    # Syntax highlighting
+    sudo apt-get install zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+    echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 }
 
 # sublime text installer
