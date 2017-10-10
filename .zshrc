@@ -102,6 +102,6 @@ alias ain="sudo apt-get install"
 alias arm="sudo apt-get remove"
 alias aup="sudo apt-get update"
 
-
-
+# Syntax highlight
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
