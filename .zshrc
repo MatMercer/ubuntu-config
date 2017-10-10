@@ -97,3 +97,11 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # PHP brew configuration
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
 
+# Apt-get aliases
+alias ain="sudo apt-get install"
+alias arm="sudo apt-get remove"
+alias aup="sudo apt-get update"
+
+
+
+
